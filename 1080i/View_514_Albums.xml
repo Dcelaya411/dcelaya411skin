@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Foundation -->
+<includes>
+
+    <include name="514Content">
+        <visible>Container.Content(artists) | Container.Content(albums) | Container.Content(movies) | Container.Content(tvshows)</visible>
+        <oninfo condition="ListItem.IsCollection">ActivateWindow(1132)</oninfo>
+        <top>306</top>
+        <left>61</left>
+        <width>1800</width>
+        <height>330</height>
+        <onup condition="!Skin.HasSetting(global.kioskmode)">9000</onup>
+        <ondown>1615</ondown>
+        <onleft>514</onleft>
+        <onright>514</onright>
+        <preloaditems>1</preloaditems>
+        <pagecontrol>1615</pagecontrol>
+        <orientation>horizontal</orientation>
+        <focusposition>1</focusposition>
+        <include content="forced_view" condition="Skin.HasSetting(enable.forcedviews)">
+            <param name="string" value="$LOCALIZE[37710]" />
+        </include>
+        <viewtype label="37710">list</viewtype>
+        <scrolltime tween="quadratic">400</scrolltime>
+        <itemlayout height="330" width="299.66">
+            <control type="image">
+                <left>10</left>
+                <top>11</top>
+                <width>93%</width>
+                <height>83%</height>
+                <texture border="10">common/$VAR[nofocus-shadow10]</texture>
+            </control>
+            <control type="image">
+                <left>20</left>
+                <top>20</top>
+                <right>20</right>
+                <height>256</height>
+                <texture colordiffuse="Fallback" border="4" background="true">common/diffuse_box.png</texture>
+            </control>
+            <control type="image">
+                <left>20</left>
+                <top>20</top>
+                <right>20</right>
+                <height>256</height>
+                <aspectratio scalediffuse="false" align="center" aligny="center">scale</aspectratio>
+                <texture diffuse="diffuse/diffuse_box.png" background="true">$VAR[ThumbImage]</texture>
+            </control>
+            <control type="image">
+                <left>19</left>
+                <top>19</top>
+                <right>19</right>
+                <height>258</height>
+                <texture colordiffuse="Box2" border="4" background="true">common/box21.png</texture>
+                <visible>!Skin.HasSetting(thumbnails.white)</visible>
+            </control>
+            <control type="label">
+                <align>center</align>
+                <aligny>center</aligny>
+                <width>50</width>
+                <right>13</right>
+                <top>12</top>
+                <height>50</height>
+                <textcolor>$VAR[WatchedLabelPosterColor]</textcolor>
+                <font>SymbolPoster</font>
+                <label>$VAR[WatchedLabelPoster]</label>
+                <visible>!String.IsEqual(ListItem.Label,..)</visible>
+            </control>
+        </itemlayout>
+        <focusedlayout height="330" width="299.66">
+            <control type="image">
+                <left>10</left>
+                <top>11</top>
+                <width>93%</width>
+                <height>83%</height>
+                <texture border="10">common/$VAR[nofocus-shadow10]</texture>
+            </control>
+            <control type="image">
+                <left>20</left>
+                <top>20</top>
+                <right>20</right>
+                <height>256</height>
+                <texture colordiffuse="Fallback" border="4" background="true">common/diffuse_box.png</texture>
+            </control>
+            <control type="image">
+                <left>20</left>
+                <top>20</top>
+                <right>20</right>
+                <height>256</height>
+                <aspectratio scalediffuse="false" align="center" aligny="center">scale</aspectratio>
+                <texture diffuse="diffuse/diffuse_box.png" background="true">$VAR[ThumbImage]</texture>
+            </control>
+            <control type="image">
+                <left>19</left>
+                <top>19</top>
+                <right>19</right>
+                <height>258</height>
+                <texture colordiffuse="Box2" border="4" background="true">common/box21.png</texture>
+                <visible>!Skin.HasSetting(thumbnails.white)</visible>
+            </control>
+            <control type="image">
+                <include>Animation.SelectBoxHome</include>
+                <left>12</left>
+                <top>12</top>
+                <right>12</right>
+                <bottom>47</bottom>
+                <texture border="20" colordiffuse="$VAR[ColorSquares]">common/selectbox.png</texture>
+            </control>
+            <control type="image">
+                <include>Animation.SelectBoxHome</include>
+                <left>12</left>
+                <top>12</top>
+                <right>12</right>
+                <bottom>47</bottom>
+                <texture border="20" colordiffuse="$VAR[ColorHighlightSelectbox2]">common/gradient-selectbox.png</texture>
+            </control>
+            <control type="label">
+                <align>center</align>
+                <aligny>center</aligny>
+                <width>50</width>
+                <right>13</right>
+                <top>12</top>
+                <height>50</height>
+                <textcolor>$VAR[WatchedLabelPosterColor]</textcolor>
+                <font>SymbolPoster</font>
+                <label>$VAR[WatchedLabelPoster]</label>
+                <visible>!String.IsEqual(ListItem.Label,..)</visible>
+            </control>
+        </focusedlayout>
+    </include>
+
+    <include name="514Wrap">
+        <control type="list" id="514">
+            <include>514Content</include>
+        </control>
+    </include>
+
+    <include name="514Fixed">
+        <control type="fixedlist" id="514">
+            <include>514Content</include>
+        </control>
+    </include>
+
+    <include name="View_514_Albums">
+        <description>List View (id=514)</description>
+        <control type="group">
+            <include>Animation.Common</include>
+            <!--<include>JumpBarHorizontal</include>-->
+            <include>ViewSlideForJumpBar</include>
+            <visible>Control.IsVisible(514)</visible>
+            <control type="group">
+                <control type="label">
+                    <visible>[Skin.HasSetting(NotShowClearart514)] | [[String.IsEmpty(ListItem.Art(clearlogo)) + String.IsEmpty(ListItem.Art(artist.clearlogo)) + String.IsEmpty(ListItem.Art(tvshow.clearlogo))] + !Skin.HasSetting(NotShowClearart514)]</visible>
+                    <top>220</top>
+                    <include condition="!Skin.HasSetting(514NoCenter)">CenterInfo</include>
+                    <left>80</left>
+                    <description>Header Label</description>
+                    <textcolor>Dark1</textcolor>
+                    <font>SmallBold</font>
+                    <label fallback="19055">$INFO[ListItem.Label]</label>
+                </control>
+                <control type="image" description="clearlogo">
+                    <animation effect="slide" start="0,0" end="-735,0" time="200" condition="Skin.HasSetting(514NoCenter)">Conditional</animation>
+                    <visible>!Skin.HasSetting(NotShowClearart514) + [!String.IsEmpty(ListItem.Art(clearlogo)) | !String.IsEmpty(ListItem.Art(artist.clearlogo)) | !String.IsEmpty(ListItem.Art(tvshow.clearlogo))]</visible>
+                    <top>180</top>
+                    <width>275</width>
+                    <left>815</left>
+                    <aspectratio align="left" aligny="top">keep</aspectratio>
+                    <texture background="true">$VAR[ClearLogoTopVar]</texture>
+                    <include>Animation.ViHi2</include>
+                    <fadetime>100</fadetime>
+                </control>
+                <control type="grouplist">
+                    <visible>!String.IsEqual(ListItem.Label,..)</visible>
+                    <left>80</left>
+                    <top>620</top>
+                    <height>600</height>
+                    <itemgap>0</itemgap>
+                    <orientation>vertical</orientation>
+                    <control type="label">
+                        <visible>Container.Content(movies)</visible>
+                        <height>36</height>
+                        <font>Tiny</font>
+                        <animation effect="slide" start="0,0" end="100,0" time="200" condition="!Skin.HasSetting(514NoCenter)">Conditional</animation>
+                        <include condition="!Skin.HasSetting(514NoCenter)">CenterInfo</include>
+                        <textcolor>Dark2</textcolor>
+                        <label fallback="19055">$INFO[ListItem.Tagline]</label>
+                    </control>
+                    <control type="label">
+                        <visible>Container.Content(tvshows)</visible>
+                        <height>36</height>
+                        <font>Tiny</font>
+                        <animation effect="slide" start="0,0" end="100,0" time="200" condition="!Skin.HasSetting(514NoCenter)">Conditional</animation>
+                        <include condition="!Skin.HasSetting(514NoCenter)">CenterInfo</include>
+                        <textcolor>Dark2</textcolor>
+                        <label>$INFO[ListItem.Episode,, $LOCALIZE[20360]]$INFO[ListItem.Property(UnWatchedEpisodes),  •  , $LOCALIZE[16101]]$INFO[ListItem.Duration(mins),  •  , $LOCALIZE[31102]]$INFO[ListItem.Rating,  •  ]</label>
+                    </control>
+                    <control type="label">
+                        <visible>Container.Content(movies) | Container.Content(tvshows)</visible>
+                        <height>20</height>
+                        <font>Tiny</font>
+                        <textcolor>Dark2</textcolor>
+                        <label/>
+                    </control>
+                    <control type="textbox">
+                        <visible>[!String.IsEmpty(ListItem.Property(Artist_Description)) + Container.Content(artists)] | [!String.IsEmpty(ListItem.Property(Album_Description)) + Container.Content(albums)] | Container.Content(movies) | Container.Content(tvshows)</visible>
+                        <left>80</left>
+                        <include condition="!Skin.HasSetting(514NoCenter)">CenterInfo</include>
+                        <animation effect="slide" start="0,0" end="100,0" time="200" condition="!Skin.HasSetting(514NoCenter)">Conditional</animation>
+                        <font>Tiny</font>
+                        <height min="72" max="108">auto</height>
+                        <textcolor>Dark2</textcolor>
+                        <selectedcolor>Dark2</selectedcolor>
+                        <label>$VAR[LabelArtistAlbumDescription]</label>
+                    </control>
+                    <control type="label">
+                        <visible>!String.IsEmpty(ListItem.Property(Album_Description)) | !String.IsEmpty(ListItem.Property(Artist_Description)) | Container.Content(movies)| Container.Content(tvshows)</visible>
+                        <height>16</height>
+                        <font>Tiny</font>
+                        <textcolor>Dark2</textcolor>
+                        <label/>
+                    </control>
+                    <control type="label">
+                        <height>36</height>
+                        <font>Tiny</font>
+                        <animation effect="slide" start="0,0" end="100,0" time="200" condition="!Skin.HasSetting(514NoCenter)">Conditional</animation>
+                        <include condition="!Skin.HasSetting(514NoCenter)">CenterInfo</include>
+                        <textcolor>Dark2</textcolor>
+                        <label fallback="19055">$VAR[LabelArtistAlbum]</label>
+                    </control>
+                </control>
+            </control>
+            <control type="scrollbar" id="1615">
+                <include content="scrollbar_hor">
+                    <param name="scrollid" value="1615"/>
+                </include>
+            </control>
+            <include condition="!Skin.HasSetting(514NoCenter)">514Wrap</include>
+            <include condition="Skin.HasSetting(514NoCenter)">514Fixed</include>
+        </control>
+    </include>
+</includes>

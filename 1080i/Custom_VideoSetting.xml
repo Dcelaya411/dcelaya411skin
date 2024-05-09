@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Foundation -->
+<window type="dialog" id="1197">
+    <zorder>1</zorder>
+    <defaultcontrol always="true">9000</defaultcontrol>
+    <controls>
+        <include>GlobalOverlay</include>
+        <include>Animation.Common</include>
+        <control type="group">
+            <centerleft>50%</centerleft>
+            <centertop>50%</centertop>
+            <width>468</width>
+            <top>235</top>
+            <control type="image">
+                <left>-8</left>
+                <top>-20</top>
+                <right>10</right>
+                <bottom>-20</bottom>
+                <colordiffuse>White100</colordiffuse>
+                <texture border="16">common/rounded-shadow8.png</texture>
+            </control>
+            <control type="group">
+                <left>18</left>
+                <top>0</top>
+                <control type="label">
+                    <description>Header Label</description>
+                    <left>70</left>
+                    <width>1000</width>
+                    <posy>0</posy>
+                    <include>FontTop</include>
+                    <textcolor>Dark2</textcolor>
+                    <label>14018</label>
+                </control>
+                <include>Kodi_Logo</include>
+
+                <!-- Lines -->
+                <control type="image">
+                    <top>70</top>
+                    <left>17</left>
+                    <width>385</width>
+                    <height>1</height>
+                    <bottom>10</bottom>
+                    <colordiffuse>Black12</colordiffuse>
+                    <texture>common/white.png</texture>
+                </control>
+            </control>
+            <control type="group">
+                <height>490</height>
+                <left>-23</left>
+                <top>-22</top>
+                <control type="image">
+                    <description>arrow image</description>
+                    <centerleft>50%</centerleft>
+                    <posy>-16</posy>
+                    <width>16</width>
+                    <height>16</height>
+                    <texture colordiffuse="White70" flipy="true">common/arrow-small.png</texture>
+                </control>
+                <control type="image">
+                    <description>arrow image</description>
+                    <centerleft>50%</centerleft>
+                    <posy>657</posy>
+                    <width>16</width>
+                    <height>16</height>
+                    <texture colordiffuse="White70" flipy="false">common/arrow-small.png</texture>
+                </control>
+            </control>
+            <control type="image">
+                <top>90</top>
+                <left>0</left>
+                <height>70</height>
+                <width>450</width>
+                <texture colordiffuse="$VAR[ColorSelectOtherBar]">common/white.png</texture>
+                <visible>ControlGroup(9000).HasFocus()</visible>
+                <animation effect="slide" end="0,75" time="0" condition="Integer.IsGreater(Container(9000).Position,0)">Conditional</animation>
+                <animation effect="slide" end="0,75" time="0" condition="Integer.IsGreater(Container(9000).Position,1)">Conditional</animation>
+                <animation effect="slide" end="0,75" time="0" condition="Integer.IsGreater(Container(9000).Position,2)">Conditional</animation>
+                <animation effect="slide" end="0,75" time="0" condition="Integer.IsGreater(Container(9000).Position,3)">Conditional</animation>
+                <animation effect="slide" end="0,75" time="0" condition="Integer.IsGreater(Container(9000).Position,4)">Conditional</animation>
+                <animation effect="slide" end="0,75" time="0" condition="Integer.IsGreater(Container(9000).Position,5)">Conditional</animation>
+                <animation effect="slide" end="0,75" time="0" condition="Integer.IsGreater(Container(9000).Position,6)">Conditional</animation>
+            </control>
+            <control type="grouplist" id="9000">
+                <top>90</top>
+                <height>520</height>
+                <scrolltime>0</scrolltime>
+                <onright>Dialog.Close(1197)</onright>
+                <onleft>Dialog.Close(1197)</onleft>
+                <control type="button" id="81" description="SELECT OSD">
+                    <include>DefContextButtonGradient</include>
+                    <align>left</align>
+                    <label>37740</label>
+                    <label2>$VAR[OSDTypeLabel]</label2>
+                    <onclick condition="!Skin.HasSetting(osd.usethemeNewOSD) + !Skin.HasSetting(osd.usethemeNewOSDSide)">Skin.ToggleSetting(osd.usethemeNewOSD)</onclick>
+                    <onclick condition="Skin.HasSetting(osd.usethemeNewOSD)">Skin.ToggleSetting(osd.usethemeNewOSDSide)</onclick>
+                    <onclick condition="Skin.HasSetting(osd.usethemeNewOSD)">Skin.Reset(osd.usethemeNewOSD)</onclick>
+                    <onclick condition="Skin.HasSetting(osd.usethemeNewOSDSide)">Skin.Reset(osd.usethemeNewOSDSide)</onclick>
+                </control>
+                <control type="radiobutton" id="82">
+                    <description>Filter</description>
+                    <include>DefContextButtonGradient</include>
+                    <label>37591</label>
+                    <align>left</align>
+                    <selected>!Skin.HasSetting(osd.showclearlogotitle)</selected>
+                    <onclick>Skin.ToggleSetting(osd.showclearlogotitle)</onclick>
+                    <visible>Skin.HasSetting(osd.usethemeNewOSDSide)</visible>
+                </control>
+                <control type="radiobutton" id="83">
+                    <description>Filter</description>
+                    <include>DefContextButtonGradient</include>
+                    <label>31214</label>
+                    <align>left</align>
+                    <selected>Skin.HasSetting(osd.showplot)</selected>
+                    <onclick>Skin.ToggleSetting(osd.showplot)</onclick>
+                    <visible>!Skin.HasSetting(osd.usethemeNewOSDSide)</visible>
+                </control>
+                <control type="radiobutton" id="84">
+                    <description>Filter</description>
+                    <include>DefContextButtonGradient</include>
+                    <label>37824</label>
+                    <align>left</align>
+                    <selected>!Skin.HasSetting(OSD.hide.year)</selected>
+                    <onclick>Skin.ToggleSetting(OSD.hide.year)</onclick>
+                </control>
+                <control type="radiobutton" id="94">
+                    <description>Filter</description>
+                    <include>DefContextButtonGradient</include>
+                    <label>31154</label>
+                    <align>left</align>
+                    <selected>Skin.HasSetting(furniture.flagiconsosd)</selected>
+                    <onclick>Skin.ToggleSetting(furniture.flagiconsosd)</onclick>
+                </control>
+                <control type="radiobutton" id="95">
+                    <description>Filter</description>
+                    <include>DefContextButtonGradient</include>
+                    <label>31246</label>
+                    <align>left</align>
+                    <selected>Skin.HasSetting(furniture.flagiconsosdnoicons)</selected>
+                    <onclick>Skin.ToggleSetting(furniture.flagiconsosdnoicons)</onclick>
+                    <enable>Skin.HasSetting(furniture.flagiconsosd)</enable>
+                </control>
+                <control type="radiobutton" id="96">
+                    <textwidth>350</textwidth>
+                    <description>Handlung</description>
+                    <include>DefContextButtonGradient</include>
+                    <label>37521</label>
+                    <align>left</align>
+                    <selected>Skin.HasSetting(osd.coloredicons)</selected>
+                    <onclick>Skin.ToggleSetting(osd.coloredicons)</onclick>
+                    <enable>Skin.HasSetting(furniture.flagiconsosd)</enable>
+                </control>
+                <control type="radiobutton" id="97">
+                    <description>Handlung</description>
+                    <include>DefContextButtonGradient</include>
+                    <label>31218</label>
+                    <align>left</align>
+                    <selected>Skin.HasSetting(videoosd.numericrating)</selected>
+                    <onclick>Skin.ToggleSetting(videoosd.numericrating)</onclick>
+                    <enable>!VideoPlayer.Content(livetv)</enable>
+                </control>
+                <control type="radiobutton" id="98">
+                    <description>Filter</description>
+                    <include>DefContextButtonGradient</include>
+                    <label>31153</label>
+                    <align>left</align>
+                    <selected>Skin.HasSetting(ClockOSD)</selected>
+                    <onclick>Skin.ToggleSetting(ClockOSD)</onclick>
+                </control>
+                <control type="radiobutton" id="99">
+                    <include>DefContextButtonGradient</include>
+                    <label>37549</label>
+                    <align>left</align>
+                    <selected>Skin.HasSetting(pvr.showtechnicalinfo)</selected>
+                    <onclick>Skin.ToggleSetting(pvr.showtechnicalinfo)</onclick>
+                    <enable>VideoPlayer.Content(livetv)</enable>
+                </control>
+                <control type="radiobutton" id="100">
+                    <description>Filter</description>
+                    <include>DefContextButtonGradient</include>
+                    <label>37759</label>
+                    <align>left</align>
+                    <selected>Skin.HasSetting(HidePlayPauseInfo)</selected>
+                    <onclick>Skin.ToggleSetting(HidePlayPauseInfo)</onclick>
+                </control>
+                <control type="button" id="101">
+                    <align>left</align>
+                    <include>DefContextButtonGradient</include>
+                    <label>$LOCALIZE[169]/$LOCALIZE[170]</label>
+                    <onclick>PlayerResolutionSelect</onclick>
+                    <visible>Player.HasResolutions</visible>
+                </control>
+                <control type="button" id="102">
+                    <description>Filter</description>
+                    <include>DefContextButtonGradient</include>
+                    <label>37734</label>
+                    <align>left</align>
+                    <onclick>Dialog.Close(1197)</onclick>
+                    <onclick>ActivateWindow(playerprocessinfo)</onclick>
+                </control>
+            </control>
+        </control>
+    </controls>
+</window>
