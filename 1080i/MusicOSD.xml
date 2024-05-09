@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Foundation -->
+<window id="120">
+    <onunload>ClearProperty(SetUserRating,home)</onunload>
+    <include condition="!Player.PauseEnabled">OSDFocusStop</include>
+    <include condition="Player.PauseEnabled">OSDFocusPause</include>
+    <controls>
+        <control type="group">
+            <width>699</width>
+            <include content="Animation.Slide.Menu"><param name="left" value="-698" /></include>
+            <animation type="Conditional" condition="[Window.IsVisible(script-cu-lrclyrics-main.xml) + Skin.HasSetting(HideMusicOSDOnLyrics)]">
+                <effect type="fade" start="100" end="0" time="150"/>
+                <effect type="slide" end="-698" start="0" time="150"/>
+            </animation>
+            <control type="image">
+                <posx>-10</posx>
+                <posy>-10</posy>
+                <width>718</width>
+                <height>1100</height>
+                <colordiffuse>Background</colordiffuse>
+                <texture border="16">common/rounded-shadow8.png</texture>
+                <animation effect="fade" start="100" end="90" condition="true">Conditional</animation>
+            </control>
+            <control type="group">
+                <posy>294</posy>
+                <control type="group">
+                    <right>8</right>
+                    <centertop>69</centertop>
+                    <height>100</height>
+                    <width>100</width>
+                    <include content="NowPlaying_Progress">
+                        <param name="id" value="934"/>
+                        <param name="info" value="Player.Progress"/>
+                        <param name="visible" value="true"/>
+                        <param name="animation" value="Animation.RotatePlay"/>
+                    </include>
+                </control>
+                <control type="group">
+                    <top>10</top>
+                    <control type="label">
+                        <left>30</left>
+                        <right>30</right>
+                        <posy>10</posy>
+                        <align>left</align>
+                        <textcolor>Dark1</textcolor>
+                        <font>TinyBold</font>
+                        <label>19031</label>
+                    </control>
+                    <control type="label">
+                        <left>30</left>
+                        <right>30</right>
+                        <posy>50</posy>
+                        <align>left</align>
+                        <textcolor>Dark1</textcolor>
+                        <font>TinyBold</font>
+                        <label>$INFO[Container(9100).NumItems,,  $LOCALIZE[134]]</label>
+                    </control>
+                </control>
+            </control>
+            <control type="group">
+                <posy>30</posy>
+                <width>697</width>
+                <control type="image">
+                    <left>30</left>
+                    <width>260</width>
+                    <height>260</height>
+                    <texture diffuse="diffuse/wall.png" fallback="DefaultAlbumCover.png">$VAR[PlayerPoster]</texture>
+                    <aspectratio aligny="center" align="center">keep</aspectratio>
+                </control>
+                <control type="image">
+                    <left>29</left>
+                    <top>-1</top>
+                    <width>262</width>
+                    <height>262</height>
+                    <texture colordiffuse="$VAR[MusicOSDBox]" border="4" infill="false">common/box21.png</texture>
+                    <visible>!Skin.HasSetting(thumbnails.white)</visible>
+                </control>
+                <control type="grouplist">
+                    <top>0</top>
+                    <bottom>0</bottom>
+                    <left>320</left>
+                    <right>20</right>
+                    <orientation>vertical</orientation>
+                    <itemgap>12</itemgap>
+                    <visible>true</visible>
+                    <usecontrolcoords>true</usecontrolcoords>
+                    <control type="label" description="Artist">
+                        <height>48</height>
+                        <font>MediumBold3</font>
+                        <align>center</align>
+                        <textcolor>Dark1</textcolor>
+                        <label>$VAR[PlayerBigTitle]</label>
+                    </control>
+                    <control type="label" description="Song">
+                        <height>40</height>
+                        <font>MediumBold3</font>
+                        <align>center</align>
+                        <textcolor>Dark1</textcolor>
+                        <label>$VAR[PlayerTitle]</label>
+                    </control>
+                    <control type="grouplist">
+                        <width>100%</width>
+                        <height>35</height>
+                        <orientation>horizontal</orientation>
+                        <align>center</align>
+                        <top>10</top>
+                        <itemgap>12</itemgap>
+                        <usecontrolcoords>true</usecontrolcoords>
+                        <visible>true</visible>
+                        <include content="Def_Flag">
+                            <param name="Star" value="FlagstarMusic1"/>
+                            <param name="visible" value="!Skin.HasSetting(musicosd.numericrating)"/>
+                        </include>
+                        <include content="Def_Flag">
+                            <param name="Star" value="FlagstarMusic2"/>
+                            <param name="visible" value="!Skin.HasSetting(musicosd.numericrating)"/>
+                        </include>
+                        <include content="Def_Flag">
+                            <param name="Star" value="FlagstarMusic3"/>
+                            <param name="visible" value="!Skin.HasSetting(musicosd.numericrating)"/>
+                        </include>
+                        <include content="Def_Flag">
+                            <param name="Star" value="FlagstarMusic4"/>
+                            <param name="visible" value="!Skin.HasSetting(musicosd.numericrating)"/>
+                        </include>
+                        <include content="Def_Flag">
+                            <param name="Star" value="FlagstarMusic5"/>
+                            <param name="visible" value="!Skin.HasSetting(musicosd.numericrating)"/>
+                        </include>
+                        <include content="Def_Flag">
+                            <param name="Star" value="FlagstarMusic1"/>
+                            <param name="visible" value="Skin.HasSetting(musicosd.numericrating)"/>
+                        </include>
+                        <control type="label">
+                            <height>35</height>
+                            <top>0</top>
+                            <label>$VAR[RatingLabelMusicPlayer]</label>
+                            <aligny>center</aligny>
+                            <font>Flag</font>
+                            <textcolor>Dark1</textcolor>
+                            <visible>!String.IsEmpty(MusicPlayer.Rating) | [!String.IsEmpty(MusicPlayer.UserRating) + Skin.HasSetting(userrating.override.rating)]</visible>
+                            <visible>Skin.HasSetting(musicosd.numericrating)</visible>
+                        </control>
+                    </control>
+                    <control type="label" description="AlbumYear">
+                        <align>center</align>
+                        <font>SmallNavi</font>
+                        <height>40</height>
+                        <textcolor>Dark2</textcolor>
+                        <label>$VAR[PlayerPlotBox]</label>
+                        <visible>!String.IsEmpty(MusicPlayer.Album) | !String.IsEmpty(MusicPlayer.Year)</visible>
+                    </control>
+                    <control type="label" description="Duration">
+                        <height>40</height>
+                        <font>SmallNavi</font>
+                        <align>center</align>
+                        <textcolor>Dark1</textcolor>
+                        <label>$INFO[Player.Time]$INFO[Player.Duration,  /  ,]</label>
+                    </control>
+                </control>
+                <include content="scrollbar_dialog">
+                    <param name="scrollid" value="6077"/>
+                    <param name="onleft" value="9100"/>
+                    <param name="onright" value="14"/>
+                    <param name="posy" value="400"/>
+                    <param name="centerright" value="3"/>
+                    <param name="height" value="540"/>
+                </include>
+                <control type="list" id="9100">
+                    <posx>0</posx>
+                    <posy>400</posy>
+                    <height>550</height>
+                    <width>700</width>
+                    <onleft>14</onleft>
+                    <onright>6077</onright>
+                    <onup>noop</onup>
+                    <ondown>14</ondown>
+                    <pagecontrol>6077</pagecontrol>
+                    <orientation>vertical</orientation>
+                    <itemlayout height="60" width="700">
+                        <control type="image">
+                            <left>25</left>
+                            <centertop>50%</centertop>
+                            <height>32</height>
+                            <width>32</width>
+                            <texture colordiffuse="$VAR[ColorHighlight]">indicator/playwhite.png</texture>
+                            <visible>!String.IsEmpty(ListItem.Property(IsPlaying))</visible>
+                        </control>
+                        <control type="label">
+                            <left>30</left>
+                            <right>30</right>
+                            <height>100%</height>
+                            <aligny>center</aligny>
+                            <align>left</align>
+                            <font>SmallNavi</font>
+                            <textcolor>Dark1</textcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                            <selectedcolor>Dark1</selectedcolor>
+                            <visible>String.IsEmpty(ListItem.Property(IsPlaying))</visible>
+                        </control>
+                        <control type="label">
+                            <left>70</left>
+                            <right>30</right>
+                            <height>100%</height>
+                            <aligny>center</aligny>
+                            <align>left</align>
+                            <font>SmallNavi</font>
+                            <textcolor>Dark1</textcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                            <selectedcolor>Dark1</selectedcolor>
+                            <visible>!String.IsEmpty(ListItem.Property(IsPlaying))</visible>
+                        </control>
+                        <control type="label">
+                            <left>30</left>
+                            <right>30</right>
+                            <height>100%</height>
+                            <aligny>center</aligny>
+                            <align>right</align>
+                            <font>SmallNavi</font>
+                            <textcolor>Dark1</textcolor>
+                            <label>$INFO[ListItem.Label2]</label>
+                            <selectedcolor>Dark1</selectedcolor>
+                        </control>
+                        <control type="image">
+                            <width>803</width>
+                            <height>1</height>
+                            <left>-45</left>
+                            <top>0</top>
+                            <texture colordiffuse="Dark1">common/line1.png</texture>
+                            <animation effect="fade" start="100" end="10" condition="true">Conditional</animation>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout height="60" width="700">
+                        <control type="group">
+                            <visible>!Control.HasFocus(9100)</visible>
+                            <control type="image">
+                                <left>25</left>
+                                <centertop>50%</centertop>
+                                <height>32</height>
+                                <width>32</width>
+                                <texture colordiffuse="$VAR[ColorHighlight]">indicator/playwhite.png</texture>
+                                <visible>!String.IsEmpty(ListItem.Property(IsPlaying))</visible>
+                            </control>
+                            <control type="label">
+                                <left>30</left>
+                                <right>30</right>
+                                <height>100%</height>
+                                <aligny>center</aligny>
+                                <align>left</align>
+                                <font>SmallNavi</font>
+                                <textcolor>Dark1</textcolor>
+                                <label>$INFO[ListItem.Label]</label>
+                                <selectedcolor>Dark1</selectedcolor>
+                                <visible>String.IsEmpty(ListItem.Property(IsPlaying))</visible>
+                            </control>
+                            <control type="label">
+                                <left>70</left>
+                                <right>30</right>
+                                <height>100%</height>
+                                <aligny>center</aligny>
+                                <align>left</align>
+                                <font>SmallNavi</font>
+                                <textcolor>Dark1</textcolor>
+                                <label>$INFO[ListItem.Label]</label>
+                                <selectedcolor>Dark1</selectedcolor>
+                                <visible>!String.IsEmpty(ListItem.Property(IsPlaying))</visible>
+                            </control>
+                            <control type="label">
+                                <left>30</left>
+                                <right>30</right>
+                                <height>100%</height>
+                                <aligny>center</aligny>
+                                <align>right</align>
+                                <font>SmallNavi</font>
+                                <textcolor>Dark1</textcolor>
+                                <label>$INFO[ListItem.Label2]</label>
+                                <selectedcolor>Dark1</selectedcolor>
+                            </control>
+                        </control>
+                        <control type="group">
+                            <visible>Control.HasFocus(9100)</visible>
+                            <control type="image">
+                                <width>700</width>
+                                <height>100%</height>
+                                <texture colordiffuse="$VAR[ColorHighlight]">common/white.png</texture>
+                            </control>
+                            <control type="image">
+                                <left>25</left>
+                                <centertop>50%</centertop>
+                                <height>32</height>
+                                <width>32</width>
+                                <texture colordiffuse="Selected">indicator/playwhite.png</texture>
+                                <visible>!String.IsEmpty(ListItem.Property(IsPlaying))</visible>
+                            </control>
+                            <control type="label">
+                                <left>30</left>
+                                <right>30</right>
+                                <height>100%</height>
+                                <aligny>center</aligny>
+                                <align>left</align>
+                                <font>SmallNavi</font>
+                                <textcolor>Selected</textcolor>
+                                <label>$INFO[ListItem.Label]</label>
+                                <selectedcolor>Selected</selectedcolor>
+                                <visible>String.IsEmpty(ListItem.Property(IsPlaying))</visible>
+                            </control>
+                            <control type="label">
+                                <left>70</left>
+                                <right>30</right>
+                                <height>100%</height>
+                                <aligny>center</aligny>
+                                <align>left</align>
+                                <font>SmallNavi</font>
+                                <textcolor>Selected</textcolor>
+                                <label>$INFO[ListItem.Label]</label>
+                                <selectedcolor>Selected</selectedcolor>
+                                <visible>!String.IsEmpty(ListItem.Property(IsPlaying))</visible>
+                            </control>
+                            <control type="label">
+                                <left>30</left>
+                                <right>30</right>
+                                <height>100%</height>
+                                <aligny>center</aligny>
+                                <align>right</align>
+                                <font>SmallNavi</font>
+                                <textcolor>Selected</textcolor>
+                                <label>$INFO[ListItem.Label2]</label>
+                                <selectedcolor>Selected</selectedcolor>
+                            </control>
+                        </control>
+                        <control type="image">
+                            <width>803</width>
+                            <height>1</height>
+                            <left>-45</left>
+                            <top>0</top>
+                            <texture colordiffuse="Dark1">common/line1.png</texture>
+                            <animation effect="fade" start="100" end="10" condition="true">Conditional</animation>
+                        </control>
+                    </focusedlayout>
+                    <content>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="1" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="2" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="3" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="4" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="5" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="6" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="7" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="8" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="9" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="10" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="11" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="12" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="13" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="14" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                        <include content="Playlist_Item">
+                            <param name="itemid" value="15" />
+                            <param name="switch" value="Skin.HasSetting(osd.switch.title.artist)" />
+                            <param name="number" value="Skin.HasSetting(osd.show.numbers)" />
+                        </include>
+                    </content>
+                </control>
+            </control>
+            <control type="grouplist" id="101">
+                <bottom>17</bottom>
+                <width>699</width>
+                <left>-27</left>
+                <height>64</height>
+                <itemgap>11</itemgap>
+                <orientation>horizontal</orientation>
+                <align>center</align>
+                <include>OSDAudioControlsFlip</include>
+            </control>
+            <control type="image">
+                <bottom>50</bottom>
+                <left>678</left>
+                <visible>Integer.IsEqual(Container(101).Position,11) + Container(101).HasNext + !Container(101).HasPrevious</visible>
+                <include>Animation.DelayFadeIn</include>
+                <include>Animation.FadeOut</include>
+                <include>arrowdimensions</include>
+                <texture colordiffuse="Dark2">common/arrow-small-right.png</texture>
+            </control>
+        </control>
+    </controls>
+</window>
